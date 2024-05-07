@@ -30,7 +30,7 @@ export const HoverEffect = ({
                 <Link
                     href={`/${item.id}`}
                     key={item?.id}
-                    className="relative group block p-2 h-[250px] w-[350px]"
+                    className="relative group block p-2 h-52 w-[350px]"
                     onMouseEnter={() => setHoveredIndex(idx)}
                     onMouseLeave={() => setHoveredIndex(null)}
                 >

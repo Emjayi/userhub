@@ -30,7 +30,7 @@ const UserList = () => {
     };
 
     return (
-        <div className="flex flex-col justify-center items-center text-white h-screen">
+        <div className="flex flex-col justify-center items-center text-white min-h-screen">
             <div className="flex">
                 <HoverEffect items={users} />
             </div>
