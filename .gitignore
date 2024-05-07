@@ -6,10 +6,6 @@
 .pnp.js
 .yarn/install-state.gz
 
-# under construction
-/app/[id]/page.tsx
-/components/ui/user.tsx
-
 # testing
 /coverage
 

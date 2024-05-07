@@ -2,7 +2,7 @@ import { cn } from "@/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
-import Image from "next/image";
+
 
 export const HoverEffect = ({
     items,
@@ -10,6 +10,7 @@ export const HoverEffect = ({
 }: {
     items: {
         first_name: string;
+        last_name: string;
         email: string;
         id: string;
         avatar: string
@@ -53,7 +54,7 @@ export const HoverEffect = ({
                     <Card>
                         <CardImage href={item.avatar}></CardImage>
                         <div>
-                            <CardTitle>{item.first_name}</CardTitle>
+                            <CardTitle>{item.first_name} {item.last_name}</CardTitle>
                             <CardDescription>{item.email}</CardDescription>
                         </div>
                     </Card>
@@ -119,7 +120,7 @@ export const CardImage = ({
     href,
 }: {
     className?: string;
-    href: React.ReactNode;
+    href: string | undefined;
 }) => {
     return (
         <img src={href} width={100} height={100} alt="avatar" />

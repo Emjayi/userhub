@@ -1,18 +1,37 @@
 "use client"
-import User from '@/components/ui/user';
 import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import User from '@/components/ui/user';
+import Link from 'next/link';
 
-const Page = ({ id }: { id: number }) => {
+interface UserData {
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    avatar: string;
+}
 
-    const [user, setUser] = useState(null);
+const Page = () => {
+    const id = usePathname();
+
+    const [user, setUser] = useState<UserData | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     const fetchUserData = async () => {
         try {
-            const response = await fetch(`https://reqres.in/api/users/${id}`);
-            const userData = await response.json();
-            setUser(userData.data);
+            if (id) {
+                const response = await fetch(`https://reqres.in/api/users${id}`);
+                const userData = await response.json();
+                console.log(userData); // Check API response format
+                setUser(userData.data);
+            }
         } catch (error) {
             console.error('Error fetching user data:', error);
+            setError('Error fetching user data');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -20,13 +39,32 @@ const Page = ({ id }: { id: number }) => {
         fetchUserData();
     }, [id]);
 
+    if (loading) {
+        return <div className='flex justify-center items-center text-center h-screen content-center'><p className=''>Loading user information...</p></div>;
+    }
+
+    if (error) {
+        return <p>{error}</p>;
+    }
+
     if (!user) {
-        return <p>Loading user information...</p>;
+        return <p>No user found.</p>;
     }
 
     return (
-        <User id={id} name={user.first_name} />
+        <div className='h-screen'>
+            <User
+                id={user.id}
+                firstName={user.first_name}
+                lastName={user.last_name}
+                email={user.email}
+                avatar={user.avatar}
+            />
+            <Link href={`/`} className='h-[10vh] flex justify-center items-center'>
+                <button>Back</button>
+            </Link>
+        </div>
     );
-}
+};
 
 export default Page;
