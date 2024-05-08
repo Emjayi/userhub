@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import User from '@/components/ui/user';
 import Link from 'next/link';
+import { Button } from '@nextui-org/react';
 
 interface UserData {
     id: number;
@@ -60,9 +61,6 @@ const Page = () => {
                 email={user.email}
                 avatar={user.avatar}
             />
-            <Link href={`/`} className='h-[10vh] flex justify-center items-center'>
-                <button>Back</button>
-            </Link>
         </div>
     );
 };
