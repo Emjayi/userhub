@@ -45,11 +45,11 @@ const UserList = () => {
 
     return (
         <div className="flex flex-col justify-center items-center text-white min-h-screen">
-            <div className='flex gap-4'><AddUser /><Button color='secondary' onClick={() => reloadUsersData()}>Reload</Button></div>
-            <div className="flex">
+            <div className="flex md:order-2">
                 <HoverEffect items={users} />
             </div>
-            <div className="flex mt-4">
+            <div className='flex gap-1 md:order-1'><AddUser /><Button color='secondary' onClick={() => reloadUsersData()}>Reload</Button></div>
+            <div className="flex mt-4 md:order-3">
                 <Pagination
                     total={totalPages}
                     initialPage={1}
