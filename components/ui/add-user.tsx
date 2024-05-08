@@ -19,7 +19,7 @@ export default function AddUser() {
     }, []);
 
     const handleAddUser = () => (
-        alert("wtf??")
+        alert("working on it...")
     )
     return (
         <>
