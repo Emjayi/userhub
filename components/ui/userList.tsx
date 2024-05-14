@@ -4,6 +4,8 @@ import { Pagination } from "@nextui-org/pagination";
 import AddUser from './add-user';
 import { Button, user } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
+import { update } from '@barba/core/dist/core/src/utils/helpers';
+import { patchFetch } from 'next/dist/server/app-render/entry-base';
 
 const UserList = () => {
     const [users, setUsers] = useState([]);
@@ -27,6 +29,13 @@ const UserList = () => {
         }
     };
 
+    // const updateUsersData = async () => {
+    //     const res = await patchFetch(`https://reqres.in/api/users`)
+    //     const json = await res.json()
+    //     json.data.push(user)
+    // }
+
+
     useEffect(() => {
         fetchUsersData();
     }, [page]);
@@ -48,7 +57,10 @@ const UserList = () => {
             <div className="flex md:order-2">
                 <HoverEffect items={users} />
             </div>
-            <div className='flex gap-1 md:order-1'><AddUser /><Button color='secondary' onClick={() => reloadUsersData()}>Reload</Button></div>
+            <div className='flex gap-1 md:order-1'>
+                <AddUser />
+                <Button color='secondary' onClick={() => reloadUsersData()}>Reload</Button>
+            </div>
             <div className="flex mt-4 md:order-3">
                 <Pagination
                     total={totalPages}

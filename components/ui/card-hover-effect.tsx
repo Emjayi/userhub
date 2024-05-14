@@ -1,4 +1,5 @@
 import { cn } from "@/utils/cn";
+import { Button } from "@nextui-org/react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
@@ -17,6 +18,10 @@ export const HoverEffect = ({
     }[];
     className?: string;
 }) => {
+    const [deleted, isDeleted] = useState(false)
+    const handleDeleteUser = () => {
+        isDeleted(true)
+    }
     let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     return (
@@ -27,7 +32,7 @@ export const HoverEffect = ({
             )}
         >
             {items.map((item, idx) => (
-                <Link
+                <><Link
                     href={`/${item.id}`}
                     key={item?.id}
                     className="relative group block p-2 h-52 w-[350px]"
@@ -47,8 +52,7 @@ export const HoverEffect = ({
                                 exit={{
                                     opacity: 0,
                                     transition: { duration: 0.15, delay: 0.2 },
-                                }}
-                            />
+                                }} />
                         )}
                     </AnimatePresence>
                     <Card>
@@ -58,7 +62,7 @@ export const HoverEffect = ({
                             <CardDescription>{item.email}</CardDescription>
                         </div>
                     </Card>
-                </Link>
+                </Link><Button color="danger" onClick={handleDeleteUser} className="z-50 absolute right-0">delete</Button></>
             ))}
         </div>
     );
